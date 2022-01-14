@@ -19,15 +19,16 @@ public class ParseXml {
 
         DoParseXml doParseXml=new DoParseXml();
         String fileOfGoods =".\\src\\main\\resources\\import.xml";
-        String fileOfGoods01 =".\\src\\main\\resour\\src\\main\\resources\\CES\\import___5493abdf-394d-49b9-bd4c-736cbaed61d0.xml";
-        String fileOfGoods02 =".\\src\\main\\resour\\src\\main\\resources\\CES\\import___d49c4025-5fa1-49e4-9308-867c73d5c675.xml";
-        LinkedList list=doParseXml.getListOfGoods(fileOfGoods02);
+        String fileOfGoods01 =".\\src\\main\\resources\\import___5493abdf-394d-49b9-bd4c-736cbaed61d0.xml";
+        String fileOfGoods02 =".\\src\\main\\resources\\import___d49c4025-5fa1-49e4-9308-867c73d5c675.xml";
+        LinkedList list=doParseXml.getListOfGoods(fileOfGoods01);
         HashMap<String, Goods> mapOfGoods = new HashMap();
         int count = 0;
         int countOfZerro = 0;
         while (list.iteratorHasNext()) {
             Goods tempGods = list.iteratorNext();
             mapOfGoods.put(tempGods.getId(), tempGods);
+            System.out.println(tempGods);
 //            int k = tempGods.getKod();
 //            System.out.println(k);
 //            if (k == 0) {
@@ -38,7 +39,7 @@ public class ParseXml {
         }
         System.out.println("Capacity of LincedList: " + list.getCapacity());
         System.out.println(count + "  " + countOfZerro);
-        System.out.println(mapOfGoods.toString());
+//        System.out.println(mapOfGoods.toString());
     }
 
 }
