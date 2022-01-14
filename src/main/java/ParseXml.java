@@ -18,7 +18,10 @@ public class ParseXml {
     public static void main(String[] args) {
 
         DoParseXml doParseXml=new DoParseXml();
-        LinkedList list=doParseXml.getListOfGoods(".\\src\\main\\resources\\import.xml");
+        String fileOfGoods =".\\src\\main\\resources\\import.xml";
+        String fileOfGoods01 =".\\src\\main\\resour\\src\\main\\resources\\CES\\import___5493abdf-394d-49b9-bd4c-736cbaed61d0.xml";
+        String fileOfGoods02 =".\\src\\main\\resour\\src\\main\\resources\\CES\\import___d49c4025-5fa1-49e4-9308-867c73d5c675.xml";
+        LinkedList list=doParseXml.getListOfGoods(fileOfGoods02);
         HashMap<String, Goods> mapOfGoods = new HashMap();
         int count = 0;
         int countOfZerro = 0;
