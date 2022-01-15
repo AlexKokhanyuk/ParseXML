@@ -1,5 +1,9 @@
 public class Goods {
     public Goods() {
+        priseCommon = 0.0;
+        priseWhole = 0.0;
+        priseVip = 0.0;
+        stockBalanse = 0;
     }
 
     public Goods(String name, int cod) {
@@ -11,6 +15,42 @@ public class Goods {
     private String name;
     private int kod;
     private String id;
+    private double priseCommon;
+    private double priseWhole;
+    private double priseVip;
+    private int stockBalanse;
+
+    public double getPriseWhole() {
+        return priseWhole;
+    }
+
+    public void setPriseWhole(double priseWhole) {
+        this.priseWhole = priseWhole;
+    }
+
+    public double getPriseVip() {
+        return priseVip;
+    }
+
+    public void setPriseVip(double priseVip) {
+        this.priseVip = priseVip;
+    }
+
+    public int getStockBalanse() {
+        return stockBalanse;
+    }
+
+    public void setStockBalanse(int stockBalanse) {
+        this.stockBalanse = stockBalanse;
+    }
+
+    public double getPriseCommon() {
+        return priseCommon;
+    }
+
+    public void setPriseCommon(double priseCommon) {
+        this.priseCommon = priseCommon;
+    }
 //    private int guid;
 //
 //
@@ -48,7 +88,14 @@ public class Goods {
 
     @Override
     public String toString() {
-        return "'" + name + '\'' +
-                ", kod : " + kod + ", GUID : " +id;
+        return "Goods{" +
+                "name='" + name + '\'' +
+                ", kod=" + kod +
+                ", id='" + id + '\'' +
+                ", priseCommon=" + priseCommon +
+                ", priseWhole=" + priseWhole +
+                ", priseVip=" + priseVip +
+                ", stockBalanse=" + stockBalanse +
+                '}';
     }
 }
