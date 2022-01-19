@@ -35,7 +35,7 @@ public class ParseXml {
             count++;
         }
         doParseXml.addPrisesToGoods(mapOfGoods, fileOfPrises);
-        doParseXml.addStockOfGoods(mapOfGoods, fileOfPrises);
+        doParseXml.addStockOfGoods(mapOfGoods, fileOfStock);
 
 //        if (!list.isEmpty()) {
 //            System.out.println("Capacity of LincedList: " + list.getCapacity());

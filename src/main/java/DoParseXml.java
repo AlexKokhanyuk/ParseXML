@@ -107,30 +107,23 @@ public class DoParseXml {
             doc.getDocumentElement().normalize();
             NodeList nList = doc.getElementsByTagName("Предложение");
             for (int i = 0; i < nList.getLength(); i++) {
+
                 Node nNode = nList.item(i);
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                     Element eElement = (Element) nNode;
                     String sId = eElement.getElementsByTagName("Ид")
                             .item(0).getTextContent().strip();
                     Goods goodsTmp = (Goods) goods.get(sId);
-                    NodeList priseNodeList = ((Element) nNode).getElementsByTagName("ЦенаЗаЕдиницу");
-                    for (int j = 0; j < priseNodeList.getLength(); j++) {
-                        Node priseNode = priseNodeList.item(j);
-                        if (priseNode.getNodeType() == Node.ELEMENT_NODE) {
-                            Double d = Double.parseDouble(priseNode.getTextContent().strip());
-                            switch (j) {
-                                case 0:
-                                    goodsTmp.setPriseCommon(d);
-                                    break;
-                                case 1:
-                                    goodsTmp.setPriseWhole(d);
-                                    break;
-                                case 2:
-                                    goodsTmp.setPriseVip(d);
-                            }
-                        }
-                    }
+                    Node childNode = (Node) nNode.getChildNodes();
+                    if (childNode.getNodeType() == Node.ELEMENT_NODE) {
+                        Element sElement = (Element) childNode;
+                        String stockOfGoods = sElement.getElementsByTagName("Количество")
+                                .item(0).getTextContent().strip();
+//                        System.out.println(stockOfGoods);
+                        Integer intStock=Integer.parseInt(stockOfGoods);
+                        goodsTmp.setStockBalanse(intStock);
                     goods.replace(sId, goodsTmp);
+                    }
                 }
             }
         } catch (

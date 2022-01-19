@@ -26,6 +26,7 @@ public class LinkedList {
         while (first != null) {
             first = first.getNext();
         }
+        capacity=0;
     }
 
     public void printList() {
