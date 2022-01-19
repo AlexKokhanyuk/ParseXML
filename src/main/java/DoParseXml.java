@@ -2,26 +2,42 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.HashMap;
 
 public class DoParseXml {
 
-    public LinkedList getListOfGoods(String file) {
+    private Document getDocument(String fileName) {
+        File inputFile = new File(fileName);
+        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder dBuilder = null;
+        Document doc = null;
+        try {
+            dBuilder = dbFactory.newDocumentBuilder();
+            doc = dBuilder.parse(inputFile);
+            doc.getDocumentElement().normalize();
+        } catch (ParserConfigurationException | SAXException | IOException e) {
+            e.printStackTrace();
+        }
+        return doc;
+    }
+
+    public LinkedList getListOfGoods(String fileName) {
         LinkedList list = new LinkedList();
         String kodGoods;
         char kod[] = new char[3];
         char id[] = new char[11];
         try {
-            File inputFile = new File(file);
-            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            Document doc = dBuilder.parse(inputFile);
-            doc.getDocumentElement().normalize();
+            Document doc = getDocument(fileName);
+            NodeList timeList = doc.getElementsByTagName("КоммерческаяИнформация");
+            System.out.println(timeList.item(0).getAttributes().getNamedItem("ДатаФормирования"));
             NodeList nList = doc.getElementsByTagName("Товар");
             for (int i = 0; i < nList.getLength(); i++) {
                 Goods goods = new Goods();
@@ -48,22 +64,16 @@ public class DoParseXml {
                 list.insert(goods);
             }
         } catch (NullPointerException e) {
-            System.out.println("Выход за пределы значений реквизита");
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found");
+            System.out.println("Exceeding prop values");
         } catch (Exception e) {
             e.printStackTrace();
         }
         return list;
     }
 
-    public HashMap addPrisesToGoods(HashMap goods, String file) {
+    public HashMap addPrisesToGoods(HashMap goods, String fileName) {
         try {
-            File inputFile = new File(file);
-            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            Document doc = dBuilder.parse(inputFile);
-            doc.getDocumentElement().normalize();
+            Document doc = getDocument(fileName);
             NodeList nList = doc.getElementsByTagName("Предложение");
             for (int i = 0; i < nList.getLength(); i++) {
                 Node nNode = nList.item(i);
@@ -80,34 +90,26 @@ public class DoParseXml {
                             System.out.println(iStock);
                             goodsTmp.setStockBalanse(iStock);
                         }
-
                     }
                     goods.replace(sId, goodsTmp);
                 }
             }
         } catch (
                 NullPointerException e) {
-            System.out.println("Выход за пределы значений реквизита");
-        } catch (
-                FileNotFoundException e) {
-            System.out.println("File not found");
-        } catch (
+            System.out.println("Exceeding prop values");
+        }
+        catch (
                 Exception e) {
             e.printStackTrace();
         }
         return goods;
     }
 
-    public HashMap addStockOfGoods(HashMap goods, String file) {
+    public HashMap addStockOfGoods(HashMap goods, String fileName) {
         try {
-            File inputFile = new File(file);
-            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            Document doc = dBuilder.parse(inputFile);
-            doc.getDocumentElement().normalize();
+            Document doc = getDocument(fileName);
             NodeList nList = doc.getElementsByTagName("Предложение");
             for (int i = 0; i < nList.getLength(); i++) {
-
                 Node nNode = nList.item(i);
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                     Element eElement = (Element) nNode;
@@ -119,25 +121,20 @@ public class DoParseXml {
                         Element sElement = (Element) childNode;
                         String stockOfGoods = sElement.getElementsByTagName("Количество")
                                 .item(0).getTextContent().strip();
-//                        System.out.println(stockOfGoods);
-                        Integer intStock=Integer.parseInt(stockOfGoods);
+                        Integer intStock = Integer.parseInt(stockOfGoods);
                         goodsTmp.setStockBalanse(intStock);
-                    goods.replace(sId, goodsTmp);
+                        goods.replace(sId, goodsTmp);
                     }
                 }
             }
         } catch (
                 NullPointerException e) {
-            System.out.println("Выход за пределы значений реквизита");
-        } catch (
-                FileNotFoundException e) {
-            System.out.println("File not found");
-        } catch (
+            System.out.println("Exceeding prop values");
+        }
+        catch (
                 Exception e) {
             e.printStackTrace();
         }
-
         return goods;
     }
-
 }

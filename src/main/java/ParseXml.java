@@ -36,13 +36,6 @@ public class ParseXml {
         }
         doParseXml.addPrisesToGoods(mapOfGoods, fileOfPrises);
         doParseXml.addStockOfGoods(mapOfGoods, fileOfStock);
-
-//        if (!list.isEmpty()) {
-//            System.out.println("Capacity of LincedList: " + list.getCapacity());
-//            System.out.println(count + "  " + countOfZerro);
-//        } else {
-//            System.out.println("Goods is not found");
-//        }
         mapOfGoods.forEach((sId, goods) -> System.out.println(goods.getName()
                 + ", prise: " + goods.getPriseCommon() + " $ Stock: "+goods.getStockBalanse()));
         System.out.println("Size of map: " + mapOfGoods.size());

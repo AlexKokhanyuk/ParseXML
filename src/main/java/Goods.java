@@ -51,16 +51,6 @@ public class Goods {
     public void setPriseCommon(double priseCommon) {
         this.priseCommon = priseCommon;
     }
-//    private int guid;
-//
-//
-//    public int getGuid() {
-//        return guid;
-//    }
-//
-//    public void setGuid(int guid) {
-//        this.guid = guid;
-//    }
 
     public String getName() {
         return name;
