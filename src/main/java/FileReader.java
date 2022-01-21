@@ -1,7 +1,8 @@
 import java.io.File;
+import java.util.ArrayList;
 
 public class FileReader {
-    public void getFile(String pach){
+    public void getFileName(ArrayList path){
 
     }
 }
