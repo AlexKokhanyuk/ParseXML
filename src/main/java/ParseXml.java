@@ -3,17 +3,9 @@
  * @created 30/11/2021 - 13:31
  */
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Arrays;
-import java.util.HashMap;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.DocumentBuilder;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
-import org.w3c.dom.Node;
-import org.w3c.dom.Element;
+import java.util.HashMap;
+
 
 public class ParseXml {
     public static void main(String[] args) {
@@ -30,7 +22,7 @@ public class ParseXml {
         int count = 0;
         int countOfZerro = 0;
         while (list.iteratorHasNext()) {
-            Goods tempGods = list.iteratorNext();
+            Goods tempGods = (Goods) list.iteratorNext();
             mapOfGoods.put(tempGods.getId(), tempGods);
             count++;
         }

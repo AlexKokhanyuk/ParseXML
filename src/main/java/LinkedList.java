@@ -1,29 +1,33 @@
-public class LinkedList {
+public class LinkedList <T>{
+
     private Node first;
     private Node correntNode;
     private Node returnedNode;
-    private int capacity=0;
+    private int capacity = 0;
 
     public LinkedList() {
         this.first = null;
 
     }
-    public class Node {
+
+
+    public class Node<T> {
+        private T value;
+
         public Node() {
         }
 
-        public Node(Goods goods) {
-            this.value = goods;
+        public Node(T value) {
+            this.value = value;
         }
 
-        private Goods value;
-        private Node next;
+        protected Node next;
 
-        public Goods getValue() {
-            return value;
+        public T getValue() {
+            return  value;
         }
 
-        public void setValue(Goods value) {
+        public void setValue(T value) {
             this.value = value;
         }
 
@@ -34,8 +38,9 @@ public class LinkedList {
         public void setNext(Node next) {
             this.next = next;
         }
-        public void printNode(){
-            System.out.println(value);
+
+        public void printNode() {
+            System.out.print(value);
         }
     }
 
@@ -43,8 +48,8 @@ public class LinkedList {
         return first == null;
     }
 
-    public void insert(Goods goods) {
-        Node node = new Node(goods);
+    public void insert(T t) {
+        Node node = new Node(t);
         node.setNext(first);
         first = node;
         correntNode = first;
@@ -56,7 +61,7 @@ public class LinkedList {
         while (first != null) {
             first = first.getNext();
         }
-        capacity=0;
+        capacity = 0;
     }
 
     public void printList() {
@@ -72,16 +77,26 @@ public class LinkedList {
     }
 
     public boolean iteratorHasNext() {
-      return correntNode!=null;
+        return correntNode != null;
     }
-    public Goods iteratorNext() {
-            returnedNode = correntNode;
-            correntNode = correntNode.getNext();
-            return returnedNode.getValue();
+
+    public T iteratorNext() {
+        returnedNode = correntNode;
+        correntNode = correntNode.getNext();
+        return (T) returnedNode.getValue();
     }
+
     public int getCapacity() {
         return capacity;
     }
 
-
+    @Override
+    public String toString() {
+        return "LinkedList{" +
+                "first=" + first +
+                ", correntNode=" + correntNode +
+                ", returnedNode=" + returnedNode +
+                ", capacity=" + capacity +
+                '}';
+    }
 }
