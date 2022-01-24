@@ -1,5 +1,6 @@
-import javax.xml.crypto.Data;
+
 import java.util.Arrays;
+import java.util.Date;
 
 public class FileBox {
 
@@ -13,49 +14,55 @@ public class FileBox {
     }
 
     public class FileNode {
-        private Data timeOfCreate;
+        private Date timeOfCreate;
         private LinkedList<String> listOfFile;
 
         public FileNode() {
+
         }
 
-        public FileNode(String fileName, Data timeOfCreate) {
-            this.timeOfCreate = timeOfCreate;
+        public FileNode(String fileName, Date timeOfCreate) {
+            this.timeOfCreate =  timeOfCreate;
+            listOfFile=new LinkedList<>();
             this.listOfFile.insert(fileName);
         }
-
-        public Data getTimeOfCreate() {
+        public Date getTimeOfCreate() {
             return timeOfCreate;
         }
 
-        public void setTimeOfCreate(Data timeOfCreate) {
+        public void setTimeOfCreate(Date timeOfCreate) {
             this.timeOfCreate = timeOfCreate;
         }
 
-        public void addFile(String fileName, Data dateOfCreate) {
+        public void addFile(String fileName, Date dateOfCreate) {
             listOfFile.insert(fileName);
         }
 
         @Override
         public String toString() {
             return "FileNode{" +
-                    "timeOfCreate=" + timeOfCreate +
+                    "timeOfCreate=" + timeOfCreate.getTime() +
                     ", listOfFile=" + listOfFile +
                     '}';
         }
     }
 
-    public void addFile(String fileName, Data timeOfCreate) {
+    public void addFile(String fileName, Date timeOfCreate) {
+
+
         FileNode fileNode = new FileNode(fileName, timeOfCreate);
         mainArray[0] = fileNode;
-        System.out.println(fileNode);
+//        choosing a cell to place a node +- 10 minutes
+//        node call
+//        adding file path
+
+
+
     }
 
     @Override
     public String toString() {
-        return "FileBox{" +
-                "FileNode=" + FileNode +
-                ", capasity=" + capasity +
+        return "FileBox{capasity=" + capasity +
                 ", mainArray=" + Arrays.toString(mainArray) +
                 '}';
     }
