@@ -7,8 +7,20 @@ public class FilePathAndTime {
     private String filePath;
     private Date timeOfCreate;
     private Type type;
-    FilePathAndTime(String filePath){
+    FilePathAndTime(){
 
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
+
+    public void setTimeOfCreate(Date timeOfCreate) {
+        this.timeOfCreate = timeOfCreate;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
     }
 
     public String getFilePath() {
@@ -34,6 +46,15 @@ public class FilePathAndTime {
     @Override
     public int hashCode() {
         return Objects.hash(getTimeOfCreate());
+    }
+
+    @Override
+    public String toString() {
+        return "FilePathAndTime{" +
+                "filePath='" + filePath + '\'' +
+                ", timeOfCreate=" + timeOfCreate +
+                ", type=" + type +
+                '}';
     }
 }
 
