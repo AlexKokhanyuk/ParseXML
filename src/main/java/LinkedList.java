@@ -93,10 +93,8 @@ public class LinkedList <T>{
     @Override
     public String toString() {
         return "LinkedList{" +
-                "first=" + first +
-                ", correntNode=" + correntNode +
-                ", returnedNode=" + returnedNode +
-                ", capacity=" + capacity +
+                "first=" + first.getValue().toString() +
+                 ", capacity=" + capacity +
                 '}';
     }
 }
