@@ -14,6 +14,20 @@ import java.util.HashMap;
 
 public class DoParseXml {
 
+    public HashMap getGods(String fImport, String fPrices, String fRest) {
+        HashMap<String, Goods> mapOfGoods = new HashMap();
+        DoParseXml doParseXml = new DoParseXml();
+        LinkedList list = doParseXml.getListOfGoods(fImport);
+        while (list.iteratorHasNext()) {
+            Goods tempGods = (Goods) list.iteratorNext();
+            mapOfGoods.put(tempGods.getId(), tempGods);
+        }
+        doParseXml.addPrisesToGoods(mapOfGoods, fPrices);
+        doParseXml.addStockOfGoods(mapOfGoods, fRest);
+        return mapOfGoods;
+    }
+
+
     private Document getDocument(String fileName) {
         File inputFile = new File(fileName);
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -29,6 +43,14 @@ public class DoParseXml {
         return doc;
     }
 
+    public String getDate(String fileName) {
+        String sDate;
+        Document doc = getDocument(fileName);
+        NodeList timeList = doc.getElementsByTagName("КоммерческаяИнформация");
+        sDate = timeList.item(0).getAttributes().getNamedItem("ДатаФормирования").toString().trim();
+        return sDate;
+    }
+
     public LinkedList getListOfGoods(String fileName) {
         LinkedList list = new LinkedList();
         String kodGoods;
@@ -36,8 +58,7 @@ public class DoParseXml {
         char id[] = new char[11];
         try {
             Document doc = getDocument(fileName);
-            NodeList timeList = doc.getElementsByTagName("КоммерческаяИнформация");
-            System.out.println(timeList.item(0).getAttributes().getNamedItem("ДатаФормирования"));
+
             NodeList nList = doc.getElementsByTagName("Товар");
             for (int i = 0; i < nList.getLength(); i++) {
                 Goods goods = new Goods();
@@ -64,7 +85,7 @@ public class DoParseXml {
                 list.insert(goods);
             }
         } catch (NullPointerException e) {
-            System.out.println("Exceeding prop values");
+            System.out.println("Exceeding prop values Import");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -96,9 +117,8 @@ public class DoParseXml {
             }
         } catch (
                 NullPointerException e) {
-            System.out.println("Exceeding prop values");
-        }
-        catch (
+            System.out.println("Exceeding prop values Prises");
+        } catch (
                 Exception e) {
             e.printStackTrace();
         }
@@ -129,9 +149,8 @@ public class DoParseXml {
             }
         } catch (
                 NullPointerException e) {
-            System.out.println("Exceeding prop values");
-        }
-        catch (
+            System.out.println("Exceeding prop values Rest");
+        } catch (
                 Exception e) {
             e.printStackTrace();
         }

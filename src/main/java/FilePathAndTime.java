@@ -1,13 +1,12 @@
 import java.util.Date;
 import java.util.Objects;
 
-public class FilePathAndTime {
-
-
+public class FilePathAndTime implements Comparable<FilePathAndTime>{
     private String filePath;
     private Date timeOfCreate;
     private Type type;
-    FilePathAndTime(){
+
+    FilePathAndTime() {
 
     }
 
@@ -50,14 +49,21 @@ public class FilePathAndTime {
 
     @Override
     public String toString() {
-        return "FilePathAndTime{" +
-                "filePath='" + filePath + '\'' +
-                ", timeOfCreate=" + timeOfCreate +
-                ", type=" + type +
-                '}';
+        return "filePath='" + filePath + '\'' +
+                ", Date=" + timeOfCreate +
+                ", type=" + type
+                ;
+    }
+
+    @Override
+    public int compareTo(FilePathAndTime o) {
+        int result=0;
+        long lResult=timeOfCreate.getTime()-o.timeOfCreate.getTime();
+
+        return (int) lResult;
     }
 }
 
 enum Type {
-    IMPORT, PRICES, REST
+    IMPORT, PRICES, REST, CATEGORY
 }
