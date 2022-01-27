@@ -10,16 +10,19 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 
 public class DoParseXml {
 
-    public HashMap getGods(String fImport, String fPrices, String fRest) {
+    public HashMap getGods(String fImport, String fPrices, String fRest, Date date) {
+
         HashMap<String, Goods> mapOfGoods = new HashMap();
         DoParseXml doParseXml = new DoParseXml();
         LinkedList list = doParseXml.getListOfGoods(fImport);
         while (list.iteratorHasNext()) {
             Goods tempGods = (Goods) list.iteratorNext();
+            tempGods.setDate(date);
             mapOfGoods.put(tempGods.getId(), tempGods);
         }
         doParseXml.addPrisesToGoods(mapOfGoods, fPrices);

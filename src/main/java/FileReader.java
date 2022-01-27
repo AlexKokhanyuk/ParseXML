@@ -7,13 +7,17 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.stream.Stream;
 
 public class FileReader {
 
 
-    public void searchFile(String path) {
+    public ArrayList searchGoods(String path) {
+        ArrayList<HashMap> listOfMapGoods = new ArrayList<>();
 
+
+        return listOfMapGoods;
     }
 
     public ArrayList<FilePathAndTime> readFileNameFromFolder(String folder) {

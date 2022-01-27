@@ -12,46 +12,25 @@ public class ParseXml {
     public static void main(String[] args) throws UncomStuctureException {
 
 
-        FileReader fileReader = new FileReader();
-        ArrayList<FilePathAndTime> listOfFiles = fileReader.readFileNameFromFolder(".\\src\\main\\resources\\");
-        FilePathAndTime[] arrayOfFiles = listOfFiles.toArray(new FilePathAndTime[0]);
-        String fImport = "";
-        String fPrices = "";
-        String fRest = "";
-        for (int i = 0; i < 4; i += 4) {
-            long l1 = arrayOfFiles[i].getTimeOfCreate().getTime() / 100000;
-            long l2 = arrayOfFiles[i + 1].getTimeOfCreate().getTime() / 100000;
-            long l3 = arrayOfFiles[i + 2].getTimeOfCreate().getTime() / 100000;
-            long l4 = arrayOfFiles[i + 3].getTimeOfCreate().getTime() / 100000;
-            if (l1 == l2 & l2 == l3 & l3 == l4) {
-                System.out.println(arrayOfFiles[i].getTimeOfCreate());
-                if (arrayOfFiles[i + 1].getType() == Type.IMPORT) {
-                    fImport = arrayOfFiles[i + 2].getFilePath().trim();
-                }
-                if (arrayOfFiles[i + 2].getType() == Type.PRICES) {
-                    fPrices = arrayOfFiles[i + 2].getFilePath().trim();
-                }
-                if (arrayOfFiles[i + 3].getType() == Type.REST) {
-                    fRest = arrayOfFiles[i + 3].getFilePath().trim();
-                } else {
-//                    throw UncomStuctureException;
-                    System.out.println("UncomStuctureException");
-                }
+        MainController controller = new MainController();
+        ArrayList<HashMap> listOfOnloading = controller.listOfloading(".\\src\\main\\resources\\");
+//        ArrayList<HashMap> listOfOnloading = controller.listOfloading("C:\\tmp\\temp");
+
+        for (HashMap<String, Goods> mapOfGoods : listOfOnloading) {
+//            mapOfGoods.forEach((sId, goods) -> System.out.println(goods.getName()
+//                    + ", prise: " + goods.getPriseCommon() + " $ Stock: " + goods.getStockBalanse()+" GUID: "+ goods.getId()));
+//            System.out.println("Size of map: " + mapOfGoods.size());
+//            System.out.println("--------------------------------------------");
+//            System.out.println("--------------------------------------------");
+//            System.out.println("--------------------------------------------");
+//            System.out.println("--------------------------------------------");
 
 
+            Goods good = mapOfGoods.get("2a47a6a5-783b-11ec-80c7-b4b52f64fada");
+            if (good != null) {
+
+                System.out.println(good.getName()+", :"+good.getDate()+", Stock:"+good.getStockBalanse());
             }
-//            System.out.println(fImport);
-//            System.out.println(fPrices);
-//            System.out.println(fRest);
-            fImport = arrayOfFiles[1].getFilePath();
-            fPrices = String.valueOf(arrayOfFiles[2].getFilePath());
-            fRest = String.valueOf(arrayOfFiles[3].getFilePath());
-            DoParseXml doParseXml = new DoParseXml();
-            HashMap<String, Goods> mapOfGoods = doParseXml.getGods(fImport, fPrices, fRest);
-            ;
-            mapOfGoods.forEach((sId, goods) -> System.out.println(goods.getName()
-                    + ", prise: " + goods.getPriseCommon() + " $ Stock: " + goods.getStockBalanse()));
-            System.out.println("Size of map: " + mapOfGoods.size());
         }
     }
 }

@@ -59,8 +59,9 @@ public class FilePathAndTime implements Comparable<FilePathAndTime>{
     public int compareTo(FilePathAndTime o) {
         int result=0;
         long lResult=timeOfCreate.getTime()-o.timeOfCreate.getTime();
+        result=(int) lResult/100;
 
-        return (int) lResult;
+        return result;
     }
 }
 

@@ -1,3 +1,5 @@
+import java.util.Date;
+
 public class Goods {
     public Goods() {
         priseCommon = 0.0;
@@ -19,6 +21,16 @@ public class Goods {
     private double priseWhole;
     private double priseVip;
     private int stockBalanse;
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    private Date date;
 
     public double getPriseWhole() {
         return priseWhole;
