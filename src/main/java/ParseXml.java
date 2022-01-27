@@ -9,40 +9,50 @@ import java.util.HashMap;
 
 
 public class ParseXml {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws UncomStuctureException {
 
 
         FileReader fileReader = new FileReader();
         ArrayList<FilePathAndTime> listOfFiles = fileReader.readFileNameFromFolder(".\\src\\main\\resources\\");
         FilePathAndTime[] arrayOfFiles = listOfFiles.toArray(new FilePathAndTime[0]);
-        String fPrices = "";
         String fImport = "";
+        String fPrices = "";
         String fRest = "";
-        HashMap<String, Goods> mapOfGoods = new HashMap<>();
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 4; i += 4) {
+            long l1 = arrayOfFiles[i].getTimeOfCreate().getTime() / 100000;
+            long l2 = arrayOfFiles[i + 1].getTimeOfCreate().getTime() / 100000;
+            long l3 = arrayOfFiles[i + 2].getTimeOfCreate().getTime() / 100000;
+            long l4 = arrayOfFiles[i + 3].getTimeOfCreate().getTime() / 100000;
+            if (l1 == l2 & l2 == l3 & l3 == l4) {
+                System.out.println(arrayOfFiles[i].getTimeOfCreate());
+                if (arrayOfFiles[i + 1].getType() == Type.IMPORT) {
+                    fImport = arrayOfFiles[i + 2].getFilePath().trim();
+                }
+                if (arrayOfFiles[i + 2].getType() == Type.PRICES) {
+                    fPrices = arrayOfFiles[i + 2].getFilePath().trim();
+                }
+                if (arrayOfFiles[i + 3].getType() == Type.REST) {
+                    fRest = arrayOfFiles[i + 3].getFilePath().trim();
+                } else {
+//                    throw UncomStuctureException;
+                    System.out.println("UncomStuctureException");
+                }
 
-            switch (arrayOfFiles[i].getType()) {
-                case IMPORT:
-                    fImport = arrayOfFiles[i].getFilePath().trim();
-                    System.out.println("Import file is "+ arrayOfFiles[i]);
-                    break;
-                case PRICES:
-                    fPrices = arrayOfFiles[i].getFilePath().trim();
-                    System.out.println("Prices file is "+ arrayOfFiles[i]);
-                    break;
-                case REST:
-                    fRest = arrayOfFiles[i].getFilePath().trim();
-                    System.out.println("Rest file is "+ arrayOfFiles[i]);
-                    break;
+
             }
+//            System.out.println(fImport);
+//            System.out.println(fPrices);
+//            System.out.println(fRest);
+            fImport = arrayOfFiles[1].getFilePath();
+            fPrices = String.valueOf(arrayOfFiles[2].getFilePath());
+            fRest = String.valueOf(arrayOfFiles[3].getFilePath());
             DoParseXml doParseXml = new DoParseXml();
-
-            mapOfGoods = doParseXml.getGods(fImport, fPrices, fRest);
+            HashMap<String, Goods> mapOfGoods = doParseXml.getGods(fImport, fPrices, fRest);
+            ;
+            mapOfGoods.forEach((sId, goods) -> System.out.println(goods.getName()
+                    + ", prise: " + goods.getPriseCommon() + " $ Stock: " + goods.getStockBalanse()));
+            System.out.println("Size of map: " + mapOfGoods.size());
         }
-
-        mapOfGoods.forEach((sId, goods) -> System.out.println(goods.getName()
-                + ", prise: " + goods.getPriseCommon() + " $ Stock: " + goods.getStockBalanse()));
-        System.out.println("Size of map: " + mapOfGoods.size());
     }
 }
 

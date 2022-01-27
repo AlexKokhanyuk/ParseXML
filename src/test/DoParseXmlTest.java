@@ -61,7 +61,8 @@ class DoParseXmlTest {
         FilePathAndTime[] arrayOfFiles = listOfFiles.toArray(new FilePathAndTime[0]);
 
         String fImport = arrayOfFiles[1].getFilePath();
-//        String fImport = String.valueOf(arrayOfFiles[1].getFilePath());
+        String fPrices = String.valueOf(arrayOfFiles[2].getFilePath());
+        String fStock = String.valueOf(arrayOfFiles[3].getFilePath());
 
 
         LinkedList list = doParseXml.getListOfGoods(fImport);
@@ -74,7 +75,8 @@ class DoParseXmlTest {
             mapOfGoods.put(tempGods.getId(), tempGods);
             count++;
         }
-        mapOfGoods = doParseXml.addPrisesToGoods(mapOfGoods, fileOfPrises);
+        mapOfGoods = doParseXml.addPrisesToGoods(mapOfGoods, fPrices);
+        doParseXml.addStockOfGoods(mapOfGoods, fStock);
         mapOfGoods.forEach((sId, goods) -> System.out.println(goods.getName()
                 + ", prise: " + goods.getPriseCommon() + " $ Stock: " + goods.getStockBalanse()));
         System.out.println("Size of map: " + mapOfGoods.size());
@@ -82,6 +84,7 @@ class DoParseXmlTest {
 
     @Test
     void addPrisesToGoods() {
+
     }
 
     @Test

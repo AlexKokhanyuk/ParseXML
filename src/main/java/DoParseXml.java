@@ -8,6 +8,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 
@@ -93,7 +94,11 @@ public class DoParseXml {
 
     public HashMap addPrisesToGoods(HashMap goods, String fileName) {
         try {
-            Document doc = getDocument(fileName);
+            File inputFile = new File(fileName);
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(inputFile);
+            doc.getDocumentElement().normalize();
             NodeList nList = doc.getElementsByTagName("Предложение");
             for (int i = 0; i < nList.getLength(); i++) {
                 Node nNode = nList.item(i);
@@ -102,13 +107,21 @@ public class DoParseXml {
                     String sId = eElement.getElementsByTagName("Ид")
                             .item(0).getTextContent().strip();
                     Goods goodsTmp = (Goods) goods.get(sId);
-                    NodeList priseNodeList = ((Element) nNode).getElementsByTagName("Количество");
+                    NodeList priseNodeList = ((Element) nNode).getElementsByTagName("ЦенаЗаЕдиницу");
                     for (int j = 0; j < priseNodeList.getLength(); j++) {
                         Node priseNode = priseNodeList.item(j);
                         if (priseNode.getNodeType() == Node.ELEMENT_NODE) {
-                            Integer iStock = Integer.parseInt(priseNode.getTextContent().strip());
-                            System.out.println(iStock);
-                            goodsTmp.setStockBalanse(iStock);
+                            Double d = Double.parseDouble(priseNode.getTextContent().strip());
+                            switch (j) {
+                                case 0:
+                                    goodsTmp.setPriseCommon(d);
+                                    break;
+                                case 1:
+                                    goodsTmp.setPriseWhole(d);
+                                    break;
+                                case 2:
+                                    goodsTmp.setPriseVip(d);
+                            }
                         }
                     }
                     goods.replace(sId, goodsTmp);
@@ -116,7 +129,10 @@ public class DoParseXml {
             }
         } catch (
                 NullPointerException e) {
-            System.out.println("Exceeding prop values Prises");
+            System.out.println("Выход за пределы значений реквизита");
+        } catch (
+                FileNotFoundException e) {
+            System.out.println("File not found");
         } catch (
                 Exception e) {
             e.printStackTrace();
