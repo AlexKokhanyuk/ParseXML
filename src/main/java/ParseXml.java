@@ -23,15 +23,15 @@ public class ParseXml {
 
             switch (arrayOfFiles[i].getType()) {
                 case IMPORT:
-                    fImport = arrayOfFiles[i].getFilePath();
+                    fImport = arrayOfFiles[i].getFilePath().trim();
                     System.out.println("Import file is "+ arrayOfFiles[i]);
                     break;
                 case PRICES:
-                    fPrices = arrayOfFiles[i].getFilePath();
+                    fPrices = arrayOfFiles[i].getFilePath().trim();
                     System.out.println("Prices file is "+ arrayOfFiles[i]);
                     break;
                 case REST:
-                    fRest = arrayOfFiles[i].getFilePath();
+                    fRest = arrayOfFiles[i].getFilePath().trim();
                     System.out.println("Rest file is "+ arrayOfFiles[i]);
                     break;
             }
