@@ -64,7 +64,7 @@ public class FileReader {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Collections.sort(listOfFiles);
+//        Collections.sort(listOfFiles);
         return listOfFiles;
     }
 }
