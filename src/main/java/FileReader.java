@@ -45,12 +45,12 @@ public class FileReader {
                         case "rests":
                             filePathAndTime.setType(Type.REST);
                     }
-                    if (filePathAndTime.getType() != null) {
+                    if (filePathAndTime.getType() != null&filePathAndTime.getType()!=Type.CATEGORY) {
                         DoParseXml parseForDate = new DoParseXml();
                         String day = parseForDate.getDate(filePathAndTime.getFilePath()).substring(18, 28);
                         String time = parseForDate.getDate(filePathAndTime.getFilePath()).substring(29, 37);
                         String sDate = day + " " + time;
-                        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
+                        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                         try {
                             Date date = formatter.parse(sDate);
                             filePathAndTime.setTimeOfCreate(date);
