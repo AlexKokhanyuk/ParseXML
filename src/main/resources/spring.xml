@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+ 		http://www.springframework.org/schema/beans
+ 		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+
+    <bean id="contr01" name="controller" class="MainController">
+        <constructor-arg value=".\src\main\files\"/>
+        <constructor-arg ref="fileReader"/>
+        <constructor-arg ref="arraySorter"/>
+        <constructor-arg ref="doParseXml"/>
+    </bean>
+
+    <bean name="arraySorter" class="ArraySorter"/>
+    <bean name="fileReader" class="FileReader"/>
+    <bean name="doParseXml" class="DoParseXml"/>
+    <bean name="goods" class="Goods" scope="prototype"/>
+
+</beans>

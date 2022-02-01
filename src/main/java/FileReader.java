@@ -15,8 +15,6 @@ public class FileReader {
 
     public ArrayList searchGoods(String path) {
         ArrayList<HashMap> listOfMapGoods = new ArrayList<>();
-
-
         return listOfMapGoods;
     }
 

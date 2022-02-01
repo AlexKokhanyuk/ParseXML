@@ -18,8 +18,8 @@ class FileReaderTest {
     void readFileNameFromFolder() {
         Long startTime = Calendar.getInstance().getTime().getTime();
         FileReader fileReader = new FileReader();
-//        ArrayList<FilePathAndTime> listOfFiles = fileReader.readFileNameFromFolder(".\\src\\main\\resources\\");
-        ArrayList<FilePathAndTime> listOfFiles = fileReader.readFileNameFromFolder("C:\\tmp\\temp1\\");
+        ArrayList<FilePathAndTime> listOfFiles = fileReader.readFileNameFromFolder(".\\src\\main\\files\\");
+//        ArrayList<FilePathAndTime> listOfFiles = fileReader.readFileNameFromFolder("C:\\tmp\\temp1\\");
         //обработать пустую дирректорию
 //        ArrayList<FilePathAndTime> listOfFiles = fileReader.readFileNameFromFolder("C:\\tmp\\temp\\");
         FilePathAndTime[] arrayOfFiles = listOfFiles.toArray(new FilePathAndTime[0]);

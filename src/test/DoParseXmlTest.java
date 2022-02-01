@@ -25,9 +25,9 @@ class DoParseXmlTest {
     @Test
     void getAllGods() {
         DoParseXml doParseXml = new DoParseXml();
-        String fileOfGoods01 = ".\\src\\main\\resources\\import___5493abdf-394d-49b9-bd4c-736cbaed61d0.xml";
-        String fileOfPrises = ".\\src\\main\\resources\\prices___aa9533e0-4970-4592-9f9f-6480fdf8b99c.xml";
-        String fileOfStock = ".\\src\\main\\resources\\rests___5a4c78e7-fca4-4a4f-bc9c-6f849b4f3253.xml";
+        String fileOfGoods01 = ".\\src\\main\\files\\import___5493abdf-394d-49b9-bd4c-736cbaed61d0.xml";
+        String fileOfPrises = ".\\src\\main\\files\\prices___aa9533e0-4970-4592-9f9f-6480fdf8b99c.xml";
+        String fileOfStock = ".\\src\\main\\files\\rests___5a4c78e7-fca4-4a4f-bc9c-6f849b4f3253.xml";
 
         LinkedList list = doParseXml.getListOfGoods(fileOfGoods01);
         HashMap<String, Goods> mapOfGoods = new HashMap();
