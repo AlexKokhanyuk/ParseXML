@@ -1,8 +1,8 @@
 1. Get files from resurses. Clean directory.
-   Compare getieng files
+   Compare getieng files, Check file by date or sort by date
 2. Parse XML that contain id, guid and name of goods.
 3. Add goods to hash map.
-4. Parse XML that contain three prices, quantities and availability of goods.
+4. Parse XML that contain three prices, quantities and availability of goods. --
 5. Add found parameters to goods properties.
 6. Connecting with SQL database of wordpress and get goods availability, quantities and uncategorized properties by ID (or GUID)
 7. Correct availability and uncategorized if in necessary.
