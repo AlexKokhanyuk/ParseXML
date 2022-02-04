@@ -1,0 +1,17 @@
+SELECT wpcl_postmeta.post_id, wpcl_postmeta.meta_value FROM `wpcl_postmeta` WHERE wpcl_postmeta.meta_key='_id_1c'
+
+SELECT wpcl_postmeta.meta_key, wpcl_postmeta.meta_value FROM `wpcl_postmeta` WHERE wpcl_postmeta.post_id=47475
+
+
+SELECT wpcl_wc_product_meta_lookup.product_id, wpcl_wc_product_meta_lookup.stock_quantity FROM `wpcl_wc_product_meta_lookup` WHERE wpcl_wc_product_meta_lookup.stock_quantity<>NULL
+
+SELECT wpcl_wc_product_meta_lookup.product_id, wpcl_wc_product_meta_lookup.stock_quantity FROM `wpcl_wc_product_meta_lookup` WHERE wpcl_wc_product_meta_lookup.stock_quantity=5
+
+SELECT wpcl_wc_product_meta_lookup.product_id, wpcl_wc_product_meta_lookup.stock_quantity FROM `wpcl_wc_product_meta_lookup` WHERE wpcl_wc_product_meta_lookup.product_id=3051
+
+
+SELECT wpcl_wc_product_meta_lookup.product_id, wpcl_wc_product_meta_lookup.sku,wpcl_wc_product_meta_lookup.stock_quantity FROM `wpcl_wc_product_meta_lookup` WHERE wpcl_wc_product_meta_lookup.sku=73478
+
+15346 - product id(and post id) guid 5ec3ef64-e7f0-11e8-a5c2-50465d9e2c0a
+
+SELECT wpcl_postmeta.post_id, wpcl_postmeta.meta_value FROM `wpcl_postmeta` WHERE wpcl_postmeta.meta_key='_id_1c' AND wpcl_postmeta.meta_value='5ec3ef64-e7f0-11e8-a5c2-50465d9e2c0a'
